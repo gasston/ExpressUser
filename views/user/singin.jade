@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+ h1
+  p.label.label-success  #{title} #{error}
+ div.loginbox
+    form(name="login", action="singin", method="post")
+     ul 
+      li 
+       input(type="text", name="user",class="required form-control",placeholder="User name")
+      li 
+       input(type="mail", name="email",class="required form-control",placeholder="Email")
+      li 
+       input(type="password", name="password" ,class="password required form-control",placeholder="Password")
+      li 
+       input(type="password", name="confirmpassword",class="password required form-control",placeholder="Confirm password")
+  
+      input(type="submit", value="Create User", class="btn btn-default")

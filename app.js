@@ -5,10 +5,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+/* data base connection */ 
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/expressuserdata');
+
+
+/* load root object */ 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
