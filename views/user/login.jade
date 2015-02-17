@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+ h1
+  div.panel.panel-primary
+   div.panel-heading
+    h3.panel-title #{title} #{error}
+   div.panel-body
+    form(name="login", action="login",method="post")
+     div.form-group
+      label.control-label Mail adress
+      input(type="mail", name="email",class="required form-control",placeholder="Email")
+     div.form-group
+      label.control-label Password
+      input(type="password", name="password" ,class="password required form-control",placeholder="Password")
+     div.form-group
+       input(type="submit", value="Create User", class="btn btn-success")

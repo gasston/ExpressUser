@@ -5,27 +5,29 @@ var router = express.Router();
 router.get('/', function(req, res) {
     var db = req.db;
     var collection = db.get('usercollection');
-  res.send('respond with a resource');
+        collection.find({},{},function(e,docs){
+        res.render('user/index',{error:"error_1"});
+    });
 });
 /* GET users listing. */
-router.get('/singin', function(req, res) {
-  res.render('user/singin', { title: 'Singin - Create new user' });
+router.get('/signin', function(req, res) {
+  res.render('user/signin', { title: 'Signin - Create new user' });
 });
 
-/* GET users listing. */
-router.post('/singin', function(req, res) {
+/* Add new user . */
+router.post('/signin', function(req, res) {
 	var db = req.db;
     var collection = db.get('usercollection');
 	/* var form */ 
-	var username = req.params.user , 
-	email = req.params.email , 
-	password = req.params.password
+	var username = req.body.user , 
+	email = req.body.email , 
+	password = req.body.password;
 	
     collection.insert({"username": username,"password": password,"email": email},
     	function(err,doc){
     		if(err)
-    		{ console.log(err);
-    			res.render('user/singin',{error:"error_1"});
+    		{ 
+    			res.render('user/signin',{error:"error_1"});
     		}else
     		{
     			res.redirect("/");
@@ -33,6 +35,18 @@ router.post('/singin', function(req, res) {
     	}
     	);
 });
+
+/* GET users listing. */
+router.get('/login', function(req, res) {
+  res.render('user/login', { title: 'Login - Form' });
+});
+
+/* Post Login Form Process */
+router.post('/login', function(req, res) {
+	/* login action */ 
+});
+
+
 
 
 module.exports = router;
