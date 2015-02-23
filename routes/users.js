@@ -6,7 +6,7 @@ router.get('/', function(req, res) {
     var db = req.db;
     var collection = db.get('usercollection');
         collection.find({},{},function(e,docs){
-        res.render('user/index',{error:"error_1"});
+        res.json(docs);
     });
 });
 /* GET users listing. */
@@ -44,6 +44,20 @@ router.get('/login', function(req, res) {
 /* Post Login Form Process */
 router.post('/login', function(req, res) {
 	/* login action */ 
+    var db = req.db;
+    var collection = db.get('usercollection');
+	/* var form */ 
+	var email = req.body.email , password = req.body.password;
+    collection.find({ email : email , password :password },{},function(e,docs){
+                         if(docs.length > 0)
+                             {
+                                 res.json({error:"ok"});
+                             }else
+                             {
+                                res.json({error:"Nok"});
+                             }
+                          });
+    
 });
 
 
