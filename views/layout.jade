@@ -1,3 +1,5 @@
+- var user = { description: 'foo bar baz' }
+
 doctype html
 html
   head
@@ -9,4 +11,7 @@ html
   body
     block header
     block left
+     include include/navmenu.jade
+     if error
+      div.alert.alert-danger= error
     block content
